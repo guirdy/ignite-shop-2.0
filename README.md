@@ -1,4 +1,4 @@
-# DT Money
+# Ignite Shop
 
 
 This project was developed during the [Rocketseat's](https://www.rocketseat.com.br) Ignite BootCamp.
