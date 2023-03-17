@@ -1,9 +1,14 @@
 # Ignite Shop
 
+This project is a `e-commerce`,  it's a front-end challenge provided by [Rocketseat](https://www.rocketseat.com.br) BootCamp Ignite.
 
-This project was developed during the [Rocketseat's](https://www.rocketseat.com.br) Ignite BootCamp.
+Developed with `NextJS`, `Typescript` and `Stitches`.
 
-Developed with `NextJS`, `Typescript`, `Stripe`, `Axios` and `Stitches React`.
+**Features:**
+- Context API
+- Stripe API
+- Radix
+- Axios
 
 <p align=center>
   <img src="./.github/print.jpg" >
@@ -16,7 +21,7 @@ Developed with `NextJS`, `Typescript`, `Stripe`, `Axios` and `Stitches React`.
 $ npm install
 ```
 
-## Stripe Config
+### Stripe Config
 * Create a [Stripe Account](https://dashboard.stripe.com)
 * Register products in the Stripe
 * Create a `.env.local` file in project directory
