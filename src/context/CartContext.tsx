@@ -26,10 +26,9 @@ export const CartContext = createContext({} as CartContextData);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
-  console.log(cartItems);
 
   const cartTotal = cartItems.reduce((total, product) => {
-    return total + product.numberPrice;
+    return total + Number(product.price);
   }, 0);
 
   function addToCart(product: IProduct) {

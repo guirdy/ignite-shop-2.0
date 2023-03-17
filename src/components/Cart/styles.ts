@@ -1,5 +1,5 @@
 import { styled } from "../../styles";
-import * as Dialog from "@radix-ui/react-dialog"
+import * as Dialog from "@radix-ui/react-dialog";
 
 export const CartContent = styled(Dialog.Content, {
   position: "fixed",
@@ -26,9 +26,9 @@ export const CartContent = styled(Dialog.Content, {
     flexDirection: "column",
     gap: "1.5rem",
     flex: 1,
-    overflow: "auto"
-  }
-})
+    overflow: "auto",
+  },
+});
 
 export const CartClose = styled(Dialog.Close, {
   background: "none",
@@ -37,16 +37,16 @@ export const CartClose = styled(Dialog.Close, {
   position: "absolute",
   top: "1.75rem",
   right: "1.75rem",
-})
+});
 
 export const CartProduct = styled("div", {
   width: "100%",
   display: "flex",
   gap: "1.25rem",
-  hegiht: "5.8125rem",
-})
+  height: "5.8125rem",
+});
 
-export const CartProductIamge = styled("div", {
+export const CartProductImage = styled("div", {
   width: "6,3125rem",
   height: "5.8125rem",
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
@@ -55,9 +55,9 @@ export const CartProductIamge = styled("div", {
   borderRadius: 8,
 
   img: {
-    objectFit: "cover"
-  }
-})
+    objectFit: "cover",
+  },
+});
 
 export const CartProductDetails = styled("div", {
   display: "flex",
@@ -83,10 +83,11 @@ export const CartProductDetails = styled("div", {
     border: "none",
     fontSize: "1rem",
     fontWeight: 700,
-  }
-})
+    cursor: "pointer",
+  },
+});
 
-export const CartFinalization = styled('div', {
+export const CartFinalization = styled("div", {
   display: "flex",
   flexDirection: "column",
   marginTop: "auto",
@@ -103,14 +104,14 @@ export const CartFinalization = styled('div', {
 
     "$:disabled": {
       opacity: 0.6,
-      cursor: "not-allowed"
+      cursor: "not-allowed",
     },
 
     "&:not(:disabled):hover": {
       background: "$green300",
-    }
-  } 
-})
+    },
+  },
+});
 
 export const FinalizationDetails = styled("div", {
   display: "flex",
@@ -137,8 +138,8 @@ export const FinalizationDetails = styled("div", {
 
       p: {
         color: "$gray100",
-        fontSize: "$xl"
+        fontSize: "$xl",
       },
     },
   },
-})
+});

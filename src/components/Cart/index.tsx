@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog"
 import { X } from "phosphor-react";
 import { CartButton } from "../CartButton";
-import { CartClose, CartContent, CartFinalization, CartProduct, CartProductDetails, CartProductIamge, FinalizationDetails } from "./styles";
+import { CartClose, CartContent, CartFinalization, CartProduct, CartProductDetails, CartProductImage, FinalizationDetails } from "./styles";
 import Image from "next/image"
 import axios from "axios";
 import { CartContext } from "../../context/CartContext";
@@ -56,17 +56,22 @@ export function Cart() {
                 <>
                   {cartItems.map((cartItem) => (
                     <CartProduct key={cartItem.id}>
-                      <CartProductIamge>
+                      <CartProductImage>
                         <Image
                           width={100}
                           height={93}
-                          alt=""
                           src={cartItem.imageUrl}
+                          alt={cartItem.name}
                         />
-                      </CartProductIamge>
+                      </CartProductImage>
                       <CartProductDetails>
                         <p>{cartItem.name}</p>
-                        <strong>{cartItem.price}</strong>
+                        <strong>{
+                          new Intl.NumberFormat('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                          }).format(cartItem.price ? Number(cartItem.price) : 0)
+                        }</strong>
                         <button onClick={() => removeCartItem(cartItem.id)}>Remover</button>
                       </CartProductDetails>
                     </CartProduct>

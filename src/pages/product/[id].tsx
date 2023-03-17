@@ -53,17 +53,22 @@ export default function Product({ product }: ProductProps) {
 
       <ProductContainer>
         <ImageContainer>
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Image src={product.imageUrl} width={520} height={480} alt={product.name} />
         </ImageContainer>
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{
+            new Intl.NumberFormat('pt-BR', {
+              style: 'currency',
+              currency: 'BRL'
+            }).format(product.price ? Number(product.price) : 0)
+          }</span>
 
           <p>{product.description}</p>
 
           <button disabled={itemInCart > -1} onClick={handleBuyButton}>
-          {itemInCart > -1 ? "Adicionado" : "Colocar na sacola"}
+            {itemInCart > -1 ? "Adicionado" : "Colocar na sacola"}
           </button>
         </ProductDetails>
       </ProductContainer>
@@ -95,10 +100,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        }).format(price.unit_amount ? price.unit_amount / 100 : 0),
+        price: price.unit_amount ? price.unit_amount / 100 : 0,
         description: product.description,
         defaultPriceId: price.id
       }
