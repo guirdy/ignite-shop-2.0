@@ -37,6 +37,7 @@ export const CartClose = styled(Dialog.Close, {
   position: "absolute",
   top: "1.75rem",
   right: "1.75rem",
+  cursor: "pointer",
 });
 
 export const CartProduct = styled("div", {
@@ -101,6 +102,7 @@ export const CartFinalization = styled("div", {
     border: "none",
     borderRadius: 8,
     fontWeight: 700,
+    cursor: "pointer",
 
     "$:disabled": {
       opacity: 0.6,
@@ -125,7 +127,7 @@ export const FinalizationDetails = styled("div", {
     alignItems: "center",
 
     p: {
-      FontSize: "$md",
+      fontSize: "$md",
       color: "$gray300",
     },
 

@@ -24,6 +24,10 @@ export const CartButtonContainer = styled("button", {
         background: "$green500",
         color: "$white",
 
+        span: {
+          visibility: "hidden",
+        },
+
         "&:not(:disabled):hover": {
           backgroundColor: "$green300",
         },
@@ -54,4 +58,21 @@ export const CartButtonContainer = styled("button", {
     color: "gray",
     size: "medium",
   },
+});
+
+export const ProductsQt = styled("span", {
+  position: "absolute",
+  width: "28px",
+  height: "28px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  textAlign: "center",
+  backgroundColor: "$green300",
+  color: "$white",
+  fontSize: "$sm",
+  border: '4px solid $gray900',
+  borderRadius: "1000px",
+  right: "-8.35px",
+  top: "-8px",
 });
