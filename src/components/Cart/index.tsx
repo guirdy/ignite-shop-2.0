@@ -66,12 +66,7 @@ export function Cart() {
                       </CartProductImage>
                       <CartProductDetails>
                         <p>{cartItem.name}</p>
-                        <strong>{
-                          new Intl.NumberFormat('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL'
-                          }).format(cartItem.price ? Number(cartItem.price) : 0)
-                        }</strong>
+                        <strong>{cartItem.price}</strong>
                         <button onClick={() => removeCartItem(cartItem.id)}>Remover</button>
                       </CartProductDetails>
                     </CartProduct>
