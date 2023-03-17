@@ -14,7 +14,7 @@ interface CartContextData {
   cartItems: IProduct[];
   cartTotal: number;
   addToCart: (product: IProduct) => void;
-  cheackIfItemAlreadyExists: (product: string) => boolean;
+  checkIfItemAlreadyExists: (product: string) => number;
   removeCartItem: (productId: string) => void;
 }
 
@@ -26,6 +26,7 @@ export const CartContext = createContext({} as CartContextData);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
+  console.log(cartItems);
 
   const cartTotal = cartItems.reduce((total, product) => {
     return total + product.numberPrice;
@@ -39,8 +40,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setCartItems((state) => state.filter((item) => item.id !== productId));
   }
 
-  function cheackIfItemAlreadyExists(productId: string) {
-    return cartItems.some((product) => product.id === productId);
+  function checkIfItemAlreadyExists(productId: string) {
+    return cartItems.findIndex((product) => product.id === productId);
   }
 
   return (
@@ -48,7 +49,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       value={{
         cartItems,
         addToCart,
-        cheackIfItemAlreadyExists,
+        checkIfItemAlreadyExists,
         removeCartItem,
         cartTotal,
       }}

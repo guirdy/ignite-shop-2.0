@@ -1,7 +1,10 @@
+import { MouseEvent, useContext } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { GetStaticProps } from "next"
 
+import { CartButton } from "../components/CartButton"
+import { CartContext, IProduct } from "../context/CartContext"
 import { stripe } from "../lib/stripe"
 import { HomeContainer, Product } from "../styles/pages/home"
 
@@ -12,12 +15,7 @@ import Stripe from "stripe"
 import Head from "next/head"
 
 interface HomeProps {
-  products: {
-    id: string
-    name: string
-    imageUrl: string
-    price: string
-  }[]
+  products: IProduct[]
 }
 
 export default function Home({ products }: HomeProps) {
@@ -27,6 +25,13 @@ export default function Home({ products }: HomeProps) {
       spacing: 48
     }
   });
+
+  const { addToCart } = useContext(CartContext)
+
+  function handleAddToCart(event: MouseEvent<HTMLButtonElement>, product: IProduct) {
+    event.preventDefault()
+    addToCart(product)
+  }
 
   return (
     <>
@@ -38,11 +43,19 @@ export default function Home({ products }: HomeProps) {
           return (
             <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
               <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt="" />
+                <Image src={product.imageUrl} width={520} height={480} alt={product.description} />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+
+                  <CartButton
+                    color="green"
+                    size="large"
+                    onClick={(event) => handleAddToCart(event, product)}
+                  />
                 </footer>
               </Product>
             </Link>
