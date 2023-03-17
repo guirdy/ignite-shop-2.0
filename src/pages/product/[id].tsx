@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "next/image";
 import { GetStaticPaths, GetStaticProps } from "next"
 import Stripe from "stripe";
@@ -7,6 +7,7 @@ import Head from "next/head";
 
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
 import axios from "axios";
+import { CartContext } from "@/context/CartContext";
 
 interface ProductProps {
   product: {
@@ -20,7 +21,11 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const { addToCart, checkIfItemAlreadyExists } = useContext(CartContext)
+
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+
+  const itemInCart = checkIfItemAlreadyExists(product.id)
 
   async function handleBuyButton() {
     try {
@@ -57,8 +62,8 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreatingCheckoutSession} onClick={handleBuyButton}>
-            Comprar agora
+          <button disabled={itemInCart > -1} onClick={handleBuyButton}>
+          {itemInCart > -1 ? "Adicionado" : "Colocar na sacola"}
           </button>
         </ProductDetails>
       </ProductContainer>
