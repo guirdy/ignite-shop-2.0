@@ -1,4 +1,4 @@
-# Ignite Shop
+# Ignite Shop 2.0
 
 This project is a `e-commerce`,  it's a front-end challenge provided by [Rocketseat](https://www.rocketseat.com.br) BootCamp Ignite.
 
