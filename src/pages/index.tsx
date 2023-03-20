@@ -1,4 +1,4 @@
-import { MouseEvent, useContext } from "react"
+import { MouseEvent, useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { GetStaticProps } from "next"
@@ -13,6 +13,7 @@ import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
 import Head from "next/head"
+import { Skeleton } from "@/components/Skeleton"
 
 interface HomeProps {
   products: IProduct[]
@@ -26,6 +27,8 @@ export default function Home({ products }: HomeProps) {
     }
   });
 
+  const [loading, setLoading] = useState(true)
+
   const { addToCart, checkIfItemAlreadyExists } = useContext(CartContext)
 
   function handleAddToCart(event: MouseEvent<HTMLButtonElement>, product: IProduct) {
@@ -33,36 +36,46 @@ export default function Home({ products }: HomeProps) {
     addToCart(product)
   }
 
+  useEffect(() => {
+    const timeOut = setTimeout(() => setLoading(false), 2000)
+
+    return () => clearTimeout(timeOut)
+  }, [])
+
   return (
     <>
       <Head>
         <title>Home | Ignite Shop</title>
       </Head>
-      <HomeContainer ref={sliderRef} className="keen-slider">
-        {products.map(product => {
-          return (
-            <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
-              <Product className="keen-slider__slide">
-                <Image src={product.imageUrl} width={520} height={480} alt={product.description} />
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <HomeContainer ref={sliderRef} className="keen-slider">
+          {products.map(product => {
+            return (
+              <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
+                <Product className="keen-slider__slide">
+                  <Image src={product.imageUrl} width={520} height={480} alt={product.description} />
 
-                <footer>
-                  <div>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
-                  </div>
+                  <footer>
+                    <div>
+                      <strong>{product.name}</strong>
+                      <span>{product.price}</span>
+                    </div>
 
-                  <CartButton
-                    color="green"
-                    size="large"
-                    disabled={checkIfItemAlreadyExists(product.id) > -1}
-                    onClick={(event) => handleAddToCart(event, product)}
-                  />
-                </footer>
-              </Product>
-            </Link>
-          )
-        })}
-      </HomeContainer>
+                    <CartButton
+                      color="green"
+                      size="large"
+                      disabled={checkIfItemAlreadyExists(product.id) > -1}
+                      onClick={(event) => handleAddToCart(event, product)}
+                    />
+                  </footer>
+                </Product>
+              </Link>
+            )
+          })}
+        </HomeContainer>
+      )}
     </>
   )
 }
