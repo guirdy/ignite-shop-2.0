@@ -41,3 +41,5 @@ STRIPE_SECRET_KEY=
 # Run the Web Application
 $ npm run dev
 ```
+
+<h4 align=center>Developed by <a href="https://www.linkedin.com/in/guirdy/">Guilherme Leandro</a> 💻</h4>
